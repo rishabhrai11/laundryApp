@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: laundry-management
+
+  data:
+    mongodb:
+      uri: mongodb+srv://rishabhrai1111rocks:wmmKLpnyDuynmCc6@cluster0.phj0g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: Laundry
+      auto-index-creation: true
+server:
+  port: 8080
