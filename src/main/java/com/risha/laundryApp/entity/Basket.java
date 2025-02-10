@@ -4,6 +4,8 @@ package com.risha.laundryApp.entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "baskets")
@@ -13,8 +15,7 @@ import java.util.List;
 public class Basket {
     @Id
     private String id;
-    private String userId;
-    private List<Laundry> items;
+    private List<Laundry> items = new ArrayList<>();
     private double totalPrice;
 }
 
