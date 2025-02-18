@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -43,4 +44,25 @@ public class UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public void updatePassword(String username, String newPassword) {
+        try {
+            User user = userRepository.findByUsername(username);
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+        }
+        catch (Exception e) {
+            log.error("User not found",e);
+        }
+    }
+
+    public void saveAdmin(User user) {
+        user.setRoles(Arrays.asList("USER","ADMIN"));
+        userRepository.save(user);
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
 }
