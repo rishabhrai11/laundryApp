@@ -7,5 +7,40 @@ spring:
       uri: mongodb+srv://rishabhrai1111rocks:wmmKLpnyDuynmCc6@cluster0.phj0g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: Laundry
       auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: itsrishere@gmail.com
+    password: vwya lruz srfh gidn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  kafka:
+    bootstrap-servers: pkc-p11xm.us-east-1.aws.confluent.cloud:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: basket-status-change-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "com.risha.laundryApp.model"
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='5F7LVIGW7HTF2TMT' password='qUMoGwjrgJFuE8/raxtMGjs2y+6hNfrPzqHSIUG+nT79JkGAYGuigFY+HTSK3+Mc';
+      session:
+        timeout:
+          ms: 45000
 server:
   port: 8080

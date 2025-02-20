@@ -1,7 +1,6 @@
 package com.risha.laundryApp.service;
 
 import com.risha.laundryApp.entity.Basket;
-import com.risha.laundryApp.entity.Laundry;
 import com.risha.laundryApp.entity.User;
 import com.risha.laundryApp.repository.BasketRepository;
 import com.risha.laundryApp.repository.UserRepository;
@@ -9,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
