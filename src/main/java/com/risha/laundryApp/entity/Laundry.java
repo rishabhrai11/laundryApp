@@ -1,7 +1,7 @@
 package com.risha.laundryApp.entity;
 
+import com.risha.laundryApp.enums.WashType;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 @Data
 @NoArgsConstructor
@@ -10,7 +10,6 @@ public class Laundry {
 
     private String name;
     private int quantity;
-    private int price;
-    private String washType; // "Washing", "Ironing", "Dry Cleaning"
+    private WashType washType; // "Washing", "Ironing", "Dry Cleaning"
 }
 

@@ -29,8 +29,7 @@ public class BasketController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
             User user = userService.findByUsername(username);
-            basketService.addItem(user, basket);
-            return new ResponseEntity<>("Added to your basket", HttpStatus.OK);
+            return basketService.addItem(user, basket);
         }
         catch(Exception e) {
             log.error("Something went wrong", e);

@@ -8,6 +8,8 @@ import com.risha.laundryApp.repository.BasketRepository;
 import com.risha.laundryApp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -28,15 +30,22 @@ public class BasketService {
 
     @Autowired
     private BasketRepository basketRepository;
-    public void addItem(User user, Basket basketItem){
+    public ResponseEntity<?> addItem(User user, Basket basketItem){
         Basket basket = user.getBasket();
         if(basket == null){
             user.setBasket(new Basket());
         }
         user.getBasket().getItems().addAll(basketItem.getItems());
+        if(basket!=null)
+            basket.setTotalPrice(
+                    basket.getItems().stream()
+                            .mapToDouble(laundry -> laundry.getWashType().getPrice() * laundry.getQuantity()) // Extract WashType price
+                            .sum()
+            );
         basket = user.getBasket();
         basketRepository.save(basket);
         userRepository.save(user);
+        return new ResponseEntity<>("Added to your bucket\nTotal bucket price: "+basket.getTotalPrice(), HttpStatus.OK);
     }
 
     public Basket getBasket(User user){
